@@ -1,18 +1,14 @@
-//
-// Created by Infer on 1/25/2025.
-//
-
 #ifndef NODE_H
 #define NODE_H
 
-
+#include "Students.h"
 
 class Node {
     public:
-      Node();
+      Node(int data);
 
     protected:
-      int data{}; //the data for the hash table
+  Student* student; 
       Node* nextNode = nullptr;
 };
 

@@ -3,6 +3,7 @@
 #ifndef HASH_H
 #define HASH_H
 
+#include "Node.h"
 //Hash where each position is a linked list
 //Hash function attemps to spread data out evenly in the table
 //If a collision happens then the key (or student) will just go to the next node in the linked list at the same position in the table
@@ -14,11 +15,13 @@ class Hash {
   void deleteItem(int key);
 
   int hashFunction(int key); //hashes the key (maps key to 'undecodable' int)
-
+  void rehash();
+  
   void displayTable(); //display values
 
   protected:
-    int table[100]; //100 table spots
+    Node* table = new Node[100]; //100 table spots (Of nodes)
+  int tableSize = 100;
 };
 
 
