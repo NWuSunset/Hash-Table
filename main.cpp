@@ -2,6 +2,7 @@
 #include <vector>
 #include <cstring>
 #include "Students.h"
+#include "Hash.h"
 using namespace std;
 
 
@@ -36,6 +37,10 @@ int main() {
   stuVec.push_back(bob); //Insert the student pointer into the vector
 
 
+  Hash *hashTable = new Hash();
+  generateRandom(10);
+  hashTable->displayTable();
+  
   //Keep looping till the user inputs quit command
   while (!userSelection(stuVec));
 

@@ -4,8 +4,8 @@
 #include<cstring>
 
 struct Student { //Structure of a student
-    char firstName[20];
-    char lastName[20];
+  char firstName[20];
+  char lastName[20];
     int id;
     float gpa;
 };
@@ -13,6 +13,7 @@ struct Student { //Structure of a student
 //Functions
 void addStudent(Student* student);
 void generateRandom(int toGenerate); //static since it can be used without an instance of Students
+
 
 
 

@@ -1,14 +1,18 @@
 #include "Hash.h"
+#include <iostream>
 
-Hash::Hash() = defualt();
+using namespace std;
+Hash::Hash() = default;
 
 //!! Change data to student when applicable
 
-void Hash::insertItem(int key) {
+void Hash::insertItem(int key, Student* student) { //key is student ID (just makes it easier to keep trakc of)
   int index = hashFunction(key); //index is the returned hash
   int collisions = 1; //if we move onto incrimenting collisions, the head would already exist (so there would be one collision)
   if (table[index] == nullptr) { //if the head node is null
-    table[index] = new Node(key);
+    cout << table[index] << "INDEX" << endl;
+    //cout << table[index] << student->firstName << " " << student->id << endl;
+    table[index] = new Node(student);
   } else {
     Node* curr = table[index];
     
@@ -18,12 +22,12 @@ void Hash::insertItem(int key) {
       collisions++; //if there is another node in the linked list, incriment collision value
     }
     //Insert new node to end of linked list
-    curr->nextNode = new Node(key);
+    curr->nextNode = new Node(student);
   }
 
   //If there are more than 3 collision (4 things in a single linked List)
   if (collisions > 3) {
-    rehash() //rehash the table and creating double the slots
+    rehash(); //rehash the table and creating double the slots
   }
 }
 
@@ -31,7 +35,7 @@ void Hash::insertItem(int key) {
 void Hash::deleteItem(int key) {
   int index = hashFunction(key); //find the index where the key could exist
 
-  Node* curr = table[index] 
+  Node* curr = table[index]; 
   //Find the location of that specific key
     while (curr->nextNode != nullptr) {
       if (curr->nextNode->student->id == key) { //if we find the key to delete
@@ -45,6 +49,7 @@ void Hash::deleteItem(int key) {
 }
 
 int Hash::hashFunction(int key) {
+  cout << key%tableSize << "HEOIEHE" << endl;
   return (key % tableSize); //Simple hash function to spread out the table (key mod tableSize)
 }
 
@@ -54,11 +59,13 @@ void Hash::rehash() {
 
 void Hash::displayTable() {
   for (int i = 0; i < tableSize; i++) {
+    cout << i;
     //Loop through all of the linked list values
     Node* curr = table[i];
-    while (curr != nullptr) {
-      cout <<
+    while (curr != nullptr) { //print out the linked list values
+      cout << "-->" << curr->student->firstName;
       curr = curr->nextNode;
     }
+    cout << endl;
   }
 }

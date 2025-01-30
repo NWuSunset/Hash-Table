@@ -1,16 +1,20 @@
 #include "Students.h"
+#include "Hash.h"
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 
 
 
 void addStudent(Student* student) {
-
+  
 }
 
 void generateRandom(int toGenerate) {
-    //Generates random students
+  Hash *hashTable = new Hash(); 
+
+  //Generates random students
     ifstream firstFile("firstNames.txt");
     ifstream lastFile("lastNames.txt");
 
@@ -18,9 +22,10 @@ void generateRandom(int toGenerate) {
     char lastNames[40][20];
     char name[20];
 
-    int firstCount = 0;
+    int firstCount = 0; //So we know the range of random names we have
     while (firstFile.getline(name, sizeof(name))) { //go through the firstName file
-        strncpy(firstNames[firstCount], name, sizeof(firstNames[firstCount]) - 1); //copy the name to the firstNames array (limiting name size just in case)
+      //copy the name to the firstNames array (limiting name size just in case)
+      strncpy(firstNames[firstCount], name, sizeof(firstNames[firstCount]) - 1);
         firstNames[firstCount][sizeof(firstNames[firstCount]) - 1] = '\0'; //insert null character to the end of the name
         firstCount++;
     }
@@ -46,10 +51,14 @@ void generateRandom(int toGenerate) {
         strncpy(newStudent->lastName, lastNames[rand() % lastCount], sizeof(newStudent->lastName) - 1);
         newStudent->lastName[sizeof(newStudent->lastName) - 1] = '\0';
 
-       // newStudent->id = rand() % 10000; (random Id or does it have to be in order?) (check later)
+        //newStudent->id = rand() % 10000; //create incrimenting IDs?
+	//if ()
+	
+	newStudent->id = 3000 + i;
         newStudent->gpa = static_cast<float>(rand() % 5); // gpa between 0 and 4.00 (convert rand into a float)
 
-        //addStudent(newStudent);
-
+	//cout << newStudent->firstName << endl;
+	//cout << newStudent->id << endl;
+        hashTable->insertItem(newStudent->id,newStudent);
     }
 }

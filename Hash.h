@@ -11,7 +11,8 @@
 class Hash {
   public:
   Hash();
-  void insertItem(int key); //adds a key to hash table (keys are the students, which get converted using the hash function)
+  //adds a key to hash table (keys are the students, which get converted using the hash function)
+  void insertItem(int key, Student* student); 
   void deleteItem(int key);
 
   int hashFunction(int key); //hashes the key (maps key to 'undecodable' int)
@@ -20,7 +21,7 @@ class Hash {
   void displayTable(); //display values
 
   protected:
-    Node* table = new Node[100]; //100 table spots (Of nodes)
+  Node** table = new Node*[100]; //100 table spots (Of nodes)
   int tableSize = 100;
 };
 

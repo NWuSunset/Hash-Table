@@ -6,10 +6,12 @@
 class Node {
     public:
       Node(int data);
-
-    protected:
+  Node(Student* student);
+    
   Student* student; 
       Node* nextNode = nullptr;
+
+  ~Node(); //destructor just in case
 };
 
 
