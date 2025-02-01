@@ -3,6 +3,7 @@
 #include <cstring>
 #include "Students.h"
 #include "Hash.h"
+#include "Node.h"
 using namespace std;
 
 
@@ -19,7 +20,7 @@ void checkInvalid();
 //Change students to being stored in a hash table instead of a vector
 
 int main() {
-
+ cout << "Hey" << endl;
   vector<Student*> stuVec; //vector of student pointers
 
   //Just a student to start with (not needed, but why not)
@@ -38,7 +39,7 @@ int main() {
 
 
   Hash *hashTable = new Hash();
-  generateRandom(10);
+  generateRandom(10, hashTable);
   hashTable->displayTable();
   
   //Keep looping till the user inputs quit command

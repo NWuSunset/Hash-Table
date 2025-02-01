@@ -5,10 +5,9 @@
 
 class Node {
     public:
-      Node(int data);
-  Node(Student* student);
+        explicit Node(Student* student); //Explicit prevents invalid node creation to int or node. (implicit conversion by compiler)
     
-  Student* student; 
+      Student* student = nullptr;
       Node* nextNode = nullptr;
 
   ~Node(); //destructor just in case

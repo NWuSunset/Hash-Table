@@ -6,12 +6,10 @@ Hash::Hash() = default;
 
 //!! Change data to student when applicable
 
-void Hash::insertItem(int key, Student* student) { //key is student ID (just makes it easier to keep trakc of)
-  int index = hashFunction(key); //index is the returned hash
+void Hash::insertItem(const int key, Student* student) { //key is student ID (just makes it easier to keep trakc of)
+  const int index = hashFunction(key); //index is the returned hash
   int collisions = 1; //if we move onto incrimenting collisions, the head would already exist (so there would be one collision)
   if (table[index] == nullptr) { //if the head node is null
-    cout << table[index] << "INDEX" << endl;
-    //cout << table[index] << student->firstName << " " << student->id << endl;
     table[index] = new Node(student);
   } else {
     Node* curr = table[index];
@@ -33,7 +31,7 @@ void Hash::insertItem(int key, Student* student) { //key is student ID (just mak
 
 //delete item based on inserted key (Student ID)
 void Hash::deleteItem(int key) {
-  int index = hashFunction(key); //find the index where the key could exist
+  const int index = hashFunction(key); //find the index where the key could exist
 
   Node* curr = table[index]; 
   //Find the location of that specific key
@@ -48,8 +46,8 @@ void Hash::deleteItem(int key) {
   cout << "That doesn't exist in the table" << endl;
 }
 
-int Hash::hashFunction(int key) {
-  cout << key%tableSize << "HEOIEHE" << endl;
+int Hash::hashFunction(const int key) const {
+ // cout << "HASH FUNC: " << key%tableSize <<  endl;
   return (key % tableSize); //Simple hash function to spread out the table (key mod tableSize)
 }
 
@@ -57,13 +55,13 @@ void Hash::rehash() {
   cout << "ReHASH" << endl;
 }
 
-void Hash::displayTable() {
+void Hash::displayTable() const {
   for (int i = 0; i < tableSize; i++) {
     cout << i;
     //Loop through all of the linked list values
     Node* curr = table[i];
     while (curr != nullptr) { //print out the linked list values
-      cout << "-->" << curr->student->firstName;
+      cout << "-->" << curr->student->id;
       curr = curr->nextNode;
     }
     cout << endl;

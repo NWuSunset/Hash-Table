@@ -1,18 +1,12 @@
 #include "Students.h"
-#include "Hash.h"
 #include <fstream>
 #include <iostream>
 
+#include "Hash.h"
+
 using namespace std;
 
-
-
-void addStudent(Student* student) {
-  
-}
-
-void generateRandom(int toGenerate) {
-  Hash *hashTable = new Hash(); 
+void generateRandom(int toGenerate, Hash* hashTable) {
 
   //Generates random students
     ifstream firstFile("firstNames.txt");

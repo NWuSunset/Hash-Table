@@ -15,13 +15,13 @@ class Hash {
   void insertItem(int key, Student* student); 
   void deleteItem(int key);
 
-  int hashFunction(int key); //hashes the key (maps key to 'undecodable' int)
+  int hashFunction(int key) const; //hashes the key (maps key to 'undecodable' int)
   void rehash();
   
-  void displayTable(); //display values
+  void displayTable() const; //display values
 
   protected:
-  Node** table = new Node*[100]; //100 table spots (Of nodes)
+  Node** table = new Node*[100]{}; //100 table spots (Of nodes) ({} makes all table values null)
   int tableSize = 100;
 };
 
