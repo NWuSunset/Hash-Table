@@ -7,8 +7,7 @@
 using namespace std;
 
 void generateRandom(int toGenerate, Hash* hashTable) {
-
-  //Generates random students
+    //Generates random students
     ifstream firstFile("firstNames.txt");
     ifstream lastFile("lastNames.txt");
 
@@ -17,10 +16,12 @@ void generateRandom(int toGenerate, Hash* hashTable) {
     char name[20];
 
     int firstCount = 0; //So we know the range of random names we have
-    while (firstFile.getline(name, sizeof(name))) { //go through the firstName file
-      //copy the name to the firstNames array (limiting name size just in case)
-      strncpy(firstNames[firstCount], name, sizeof(firstNames[firstCount]) - 1);
-        firstNames[firstCount][sizeof(firstNames[firstCount]) - 1] = '\0'; //insert null character to the end of the name
+    while (firstFile.getline(name, sizeof(name))) {
+        //go through the firstName file
+        //copy the name to the firstNames array (limiting name size just in case)
+        strncpy(firstNames[firstCount], name, sizeof(firstNames[firstCount]) - 1);
+        firstNames[firstCount][sizeof(firstNames[firstCount]) - 1] = '\0';
+        //insert null character to the end of the name
         firstCount++;
     }
 
@@ -45,14 +46,16 @@ void generateRandom(int toGenerate, Hash* hashTable) {
         strncpy(newStudent->lastName, lastNames[rand() % lastCount], sizeof(newStudent->lastName) - 1);
         newStudent->lastName[sizeof(newStudent->lastName) - 1] = '\0';
 
-        //newStudent->id = rand() % 10000; //create incrimenting IDs?
-	//if ()
-	
-	newStudent->id = 3000 + i;
+        int newId;
+        do {
+            //Make sure the id is unique
+            newId = rand() % 3000;
+        }
+        while (hashTable->idExists(newId));
+
+        newStudent->id = newId;
         newStudent->gpa = static_cast<float>(rand() % 5); // gpa between 0 and 4.00 (convert rand into a float)
 
-	//cout << newStudent->firstName << endl;
-	//cout << newStudent->id << endl;
-        hashTable->insertItem(newStudent->id,newStudent);
+        hashTable->insertItem(newStudent->id, newStudent, false);
     }
 }
