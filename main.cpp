@@ -17,8 +17,8 @@ T validInput();
 
 int main() {
     Hash* hashTable = new Hash(); //Initial hash table
-    generateRandom(300, hashTable);
-    hashTable->displayTable();
+    //generateRandom(300, hashTable);
+    //hashTable->displayTable();
 
     //Keep looping till the user inputs quit command
     while (!userSelection(hashTable)) {
