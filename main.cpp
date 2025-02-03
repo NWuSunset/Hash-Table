@@ -31,7 +31,7 @@ int main() {
 //Menu where user selects what they want to do.
 bool userSelection(Hash* hashTable) {
     char input[8];
-    cout << "Do you want to ADD, PRINT, DELETE, or QUIT" << endl;;
+    cout << "Do you want to ADD, PRINT, DELETE, Generate (GEN) students or QUIT" << endl;;
     cin.getline(input, 8);
 
     //in case more than 8 characters are entered (so it won't break the program)
@@ -51,6 +51,13 @@ bool userSelection(Hash* hashTable) {
         return true;
     } else if (strcasecmp(input, "TABLE") == 0) { //for debugging purposes
       hashTable->displayTable();
+    } else if (strcasecmp(input, "GEN") == 0) {
+        cout << "How many students do you want to generate?" << endl;
+        const int num = validInput<int>();
+        cout << "Generating students..." << endl;
+        generateRandom(num, hashTable);
+        cout << "Students generated" << endl;
+        cin.ignore();
     }
     return false;
 }
@@ -78,6 +85,7 @@ void Add(Hash* hashTable) {
 
     cout << "Adding Student..." << endl; //just for fun
     hashTable->insertItem(student->id, student, false);
+    cout << "Student added" << endl;
 }
 
 //Prints out all the currently stored student data.
@@ -105,6 +113,7 @@ void Delete(Hash* hashTable) {
 
     cout << "Deleting student..." << endl;
     hashTable->deleteItem(id);
+    cout << "Student deleted" << endl;
     cin.ignore();
 }
 

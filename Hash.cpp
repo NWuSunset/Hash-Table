@@ -84,7 +84,7 @@ int Hash::hashFunction(const int key) const {
 
 //Double the size of the table, then rehash everything
 void Hash::rehash() {
-    cout << "REHASH" << endl;
+   // cout << "REHASH" << endl;
     const int oldSize = tableSize;
     tableSize *= 2; //double table size
     Node** oldTable = table; //Save old table

@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//3000 is the maximum number of students that can be generated (since the id is between 0 and 3000)
 void generateRandom(int toGenerate, Hash* hashTable) {
     //Generates random students
     ifstream firstFile("firstNames.txt");
@@ -48,13 +49,13 @@ void generateRandom(int toGenerate, Hash* hashTable) {
 
         int newId;
         do {
-            //Make sure the id is unique
+            //Make sure the id is unique (so maximum of 3000 students using this rand method, more could be generated if using random library).
             newId = rand() % 3000;
         }
         while (hashTable->idExists(newId));
 
         newStudent->id = newId;
-        newStudent->gpa = static_cast<float>(rand() % 5); // gpa between 0 and 4.00 (convert rand into a float)
+        newStudent->gpa = 1.0f + static_cast<float>(rand() % 300) / 100.0f; // gpa between 1.00 and 4.00
 
         hashTable->insertItem(newStudent->id, newStudent, false);
     }
