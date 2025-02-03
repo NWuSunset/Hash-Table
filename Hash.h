@@ -1,6 +1,5 @@
 #ifndef HASH_H
 #define HASH_H
-
 #include "Node.h"
 //Hash where each position is a linked list
 //Hash function attempts to spread data out evenly in the table
@@ -15,17 +14,17 @@ public:
     void deleteItem(int key);
 
     int hashFunction(int key) const; //hashes the key (maps key to 'undecidable' int)
-    void rehash();
+    void rehash(); //double size of table and insert everything back in 
 
-    void displayTable() const; //display values
+    void displayTable() const; //displays Indexes and ids at those indexes
 
-    bool idExists(int id) const;
+    bool idExists(int id) const; //check if an id has already been created
 
-protected:
     Node** table = new Node*[100]{}; //100 table spots (Of nodes) ({} makes all table values null)
-    int tableSize = 100;
-    int* idArray = new int[10000]{};
-    //Array of all ids (an unordered_set would be more efficient but IDK if I am able to use it?)
+    int tableSize = 100; //size of table
+
+protected: 
+    int* idArray = new int[10000]{}; //Array of all ids (an unordered_set would be more efficient but IDK if I am able to use it?)
     int idCount = 0; //number of ids in the array
 };
 

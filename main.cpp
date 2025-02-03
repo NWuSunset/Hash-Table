@@ -17,7 +17,7 @@ T validInput();
 
 int main() {
     Hash* hashTable = new Hash(); //Initial hash table
-    generateRandom(100, hashTable);
+    generateRandom(300, hashTable);
     hashTable->displayTable();
 
     //Keep looping till the user inputs quit command
@@ -49,6 +49,8 @@ bool userSelection(Hash* hashTable) {
         Delete(hashTable);
     } else if (strcasecmp(input, "QUIT") == 0) {
         return true;
+    } else if (strcasecmp(input, "TABLE") == 0) { //for debugging purposes
+      hashTable->displayTable();
     }
     return false;
 }
@@ -80,7 +82,20 @@ void Add(Hash* hashTable) {
 
 //Prints out all the currently stored student data.
 void Print(const Hash* hashTable) {
-    hashTable->displayTable();
+  bool hasStudent = false;
+  for (int i = 0; i < hashTable->tableSize; i++) {
+    const Node* curr = hashTable->table[i];
+    if (curr != nullptr) { //if there are students at this index
+      hasStudent = true;
+      while (curr != nullptr) {
+	curr->student->printData(); //print out student data
+	curr = curr->nextNode;
+      }
+    }
+  }
+  if (hasStudent == false) {
+    cout << "There are no students in the list" << endl;
+  }
 }
 
 //User inputs the id of the student to remove from the list

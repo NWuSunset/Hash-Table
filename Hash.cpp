@@ -33,6 +33,7 @@ void Hash::insertItem(const int key, Student* student, const bool isRehashing) {
 
     idArray[idCount++] = key; //Add ID to the id Array for tracking
 
+    
     //If there are more than 3 collision (4 things in a single linked List chain)
     if (collisions >= 3) {
         rehash(); //rehash the table and creating double the slots
@@ -60,11 +61,12 @@ void Hash::deleteItem(const int key) {
         table[index] = curr->nextNode; //Update the head node to the next position
     } else {
         //If isn't the head
-        prev->nextNode = curr->nextNode; //skip over the node to be deleted
+        prev->nextNode = curr->nextNode; //skip over the node to be deleted (reorder the linked list)
     }
 
     delete curr; //delete found node
 
+    //Update the number of ids
     for (int i = 0; i < idCount; i++) {
         if (idArray[i] == key) {
             //Find the key that was deleted
@@ -72,7 +74,7 @@ void Hash::deleteItem(const int key) {
             //set that to the last element in the array (and de-increment the id count, basically removing that id from the array)
             i = idCount; // exit for loop
         }
-    }
+    } 
 }
 
 int Hash::hashFunction(const int key) const {
@@ -86,7 +88,7 @@ void Hash::rehash() {
     const int oldSize = tableSize;
     tableSize *= 2; //double table size
     Node** oldTable = table; //Save old table
-    table = new Node*[tableSize]; //Table is now an empty table of double the original size
+    table = new Node*[tableSize]{}; //Table is now an empty table of double the original size
 
     //Go through the old values
     for (int i = 0; i < oldSize; i++) {
@@ -98,7 +100,7 @@ void Hash::rehash() {
         }
     }
     delete[] oldTable; //free up memory
-}
+} //!!CHECK IF THE nodes next is still pointing to the old table that was deleted.
 
 void Hash::displayTable() const {
     //Debugging function, displays Indexes along with keys (student ids)
@@ -117,10 +119,10 @@ void Hash::displayTable() const {
 }
 
 bool Hash::idExists(const int id) const {
-    for (int i = 0; i < idCount; i++) {
-        if (idArray[i] == id) {
+   for (int i = 0; i < idCount; i++) {
+     if (idArray[i] == id) {
             return true;
-        }
-    }
-    return false;
+     }
+   } 
+   return false;
 }
